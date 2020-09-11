@@ -1,0 +1,6 @@
+framework module BaatoSwift {
+  umbrella header "BaatoSwift.h"
+
+  export *
+  module * { export * }
+}

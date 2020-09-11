@@ -7,13 +7,70 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A335AAFD5D5DD4415F128AE3 /* libPods-BaatoSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B25F207AE7AE41B4DD4921D2 /* libPods-BaatoSwift.a */; };
+		FE5B0DF824FE361900CE19F5 /* API.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE5B0DE524FE361900CE19F5 /* API.plist */; };
+		FE5B0DF924FE361900CE19F5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DE624FE361900CE19F5 /* API.swift */; };
+		FE5B0DFA24FE361900CE19F5 /* GHRoutePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DE924FE361900CE19F5 /* GHRoutePath.swift */; };
+		FE5B0DFB24FE361900CE19F5 /* GHRouteAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DEA24FE361900CE19F5 /* GHRouteAlgorithm.swift */; };
+		FE5B0DFC24FE361900CE19F5 /* GHRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DEB24FE361900CE19F5 /* GHRouting.swift */; };
+		FE5B0DFD24FE361900CE19F5 /* GHInstructionSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DEC24FE361900CE19F5 /* GHInstructionSign.swift */; };
+		FE5B0DFE24FE361900CE19F5 /* CLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DED24FE361900CE19F5 /* CLExtensions.swift */; };
+		FE5B0DFF24FE361900CE19F5 /* GHBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DEE24FE361900CE19F5 /* GHBoundingBox.swift */; };
+		FE5B0E0024FE361900CE19F5 /* GHInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DEF24FE361900CE19F5 /* GHInstruction.swift */; };
+		FE5B0E0124FE361900CE19F5 /* GHRouteOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DF024FE361900CE19F5 /* GHRouteOptions.swift */; };
+		FE5B0E0224FE361900CE19F5 /* GHVehicleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DF124FE361900CE19F5 /* GHVehicleType.swift */; };
+		FE5B0E0324FE361900CE19F5 /* GHDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DF224FE361900CE19F5 /* GHDecoder.swift */; };
+		FE5B0E0424FE361900CE19F5 /* GHRouteWeighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DF324FE361900CE19F5 /* GHRouteWeighting.swift */; };
+		FE5B0E0524FE361900CE19F5 /* NavResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DF424FE361900CE19F5 /* NavResponse.swift */; };
+		FE5B0E0624FE361900CE19F5 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DF524FE361900CE19F5 /* SearchResult.swift */; };
+		FE5B0E0724FE361900CE19F5 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DF624FE361900CE19F5 /* Place.swift */; };
+		FE5B0E0824FE361900CE19F5 /* ResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B0DF724FE361900CE19F5 /* ResponseType.swift */; };
 		FE61BE8324FCD9B3005A8498 /* BaatoSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = FE61BE8124FCD9B3005A8498 /* BaatoSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FE99217D250A2DE90011B4ED /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		7C004AF94D83B554692E4B33 /* Pods-BaatoSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaatoSwift.debug.xcconfig"; path = "Target Support Files/Pods-BaatoSwift/Pods-BaatoSwift.debug.xcconfig"; sourceTree = "<group>"; };
+		B25F207AE7AE41B4DD4921D2 /* libPods-BaatoSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BaatoSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA5DAA5FEC04E2E71012E0B2 /* Pods-BaatoSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaatoSwift.release.xcconfig"; path = "Target Support Files/Pods-BaatoSwift/Pods-BaatoSwift.release.xcconfig"; sourceTree = "<group>"; };
+		FE5B0DE524FE361900CE19F5 /* API.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = API.plist; sourceTree = "<group>"; };
+		FE5B0DE624FE361900CE19F5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		FE5B0DE924FE361900CE19F5 /* GHRoutePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GHRoutePath.swift; sourceTree = "<group>"; };
+		FE5B0DEA24FE361900CE19F5 /* GHRouteAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GHRouteAlgorithm.swift; sourceTree = "<group>"; };
+		FE5B0DEB24FE361900CE19F5 /* GHRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GHRouting.swift; sourceTree = "<group>"; };
+		FE5B0DEC24FE361900CE19F5 /* GHInstructionSign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GHInstructionSign.swift; sourceTree = "<group>"; };
+		FE5B0DED24FE361900CE19F5 /* CLExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLExtensions.swift; sourceTree = "<group>"; };
+		FE5B0DEE24FE361900CE19F5 /* GHBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GHBoundingBox.swift; sourceTree = "<group>"; };
+		FE5B0DEF24FE361900CE19F5 /* GHInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GHInstruction.swift; sourceTree = "<group>"; };
+		FE5B0DF024FE361900CE19F5 /* GHRouteOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GHRouteOptions.swift; sourceTree = "<group>"; };
+		FE5B0DF124FE361900CE19F5 /* GHVehicleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GHVehicleType.swift; sourceTree = "<group>"; };
+		FE5B0DF224FE361900CE19F5 /* GHDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GHDecoder.swift; sourceTree = "<group>"; };
+		FE5B0DF324FE361900CE19F5 /* GHRouteWeighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GHRouteWeighting.swift; sourceTree = "<group>"; };
+		FE5B0DF424FE361900CE19F5 /* NavResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavResponse.swift; sourceTree = "<group>"; };
+		FE5B0DF524FE361900CE19F5 /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		FE5B0DF624FE361900CE19F5 /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		FE5B0DF724FE361900CE19F5 /* ResponseType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseType.swift; sourceTree = "<group>"; };
 		FE61BE7E24FCD9B3005A8498 /* BaatoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BaatoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE61BE8124FCD9B3005A8498 /* BaatoSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaatoSwift.h; sourceTree = "<group>"; };
 		FE61BE8224FCD9B3005A8498 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE992174250A2DE80011B4ED /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE992175250A2DE80011B4ED /* geos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = geos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE992176250A2DE80011B4ED /* GEOSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GEOSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE9986B325020C7A006293BF /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE9986B425020C7A006293BF /* geos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = geos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE9986B525020C7A006293BF /* GEOSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GEOSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,17 +78,82 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A335AAFD5D5DD4415F128AE3 /* libPods-BaatoSwift.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0399582FFE5799317466422A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7C004AF94D83B554692E4B33 /* Pods-BaatoSwift.debug.xcconfig */,
+				EA5DAA5FEC04E2E71012E0B2 /* Pods-BaatoSwift.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9442B34F2EF242B56D25F127 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE992174250A2DE80011B4ED /* Alamofire.framework */,
+				FE992175250A2DE80011B4ED /* geos.framework */,
+				FE992176250A2DE80011B4ED /* GEOSwift.framework */,
+				FE9986B325020C7A006293BF /* Alamofire.framework */,
+				FE9986B425020C7A006293BF /* geos.framework */,
+				FE9986B525020C7A006293BF /* GEOSwift.framework */,
+				B25F207AE7AE41B4DD4921D2 /* libPods-BaatoSwift.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FE5B0DE424FE361900CE19F5 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				FE5B0DE624FE361900CE19F5 /* API.swift */,
+				FE5B0DE524FE361900CE19F5 /* API.plist */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		FE5B0DE724FE361900CE19F5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FE5B0DE824FE361900CE19F5 /* Route Modals */,
+				FE5B0DF424FE361900CE19F5 /* NavResponse.swift */,
+				FE5B0DF524FE361900CE19F5 /* SearchResult.swift */,
+				FE5B0DF624FE361900CE19F5 /* Place.swift */,
+				FE5B0DF724FE361900CE19F5 /* ResponseType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FE5B0DE824FE361900CE19F5 /* Route Modals */ = {
+			isa = PBXGroup;
+			children = (
+				FE5B0DE924FE361900CE19F5 /* GHRoutePath.swift */,
+				FE5B0DEA24FE361900CE19F5 /* GHRouteAlgorithm.swift */,
+				FE5B0DEB24FE361900CE19F5 /* GHRouting.swift */,
+				FE5B0DEC24FE361900CE19F5 /* GHInstructionSign.swift */,
+				FE5B0DED24FE361900CE19F5 /* CLExtensions.swift */,
+				FE5B0DEE24FE361900CE19F5 /* GHBoundingBox.swift */,
+				FE5B0DEF24FE361900CE19F5 /* GHInstruction.swift */,
+				FE5B0DF024FE361900CE19F5 /* GHRouteOptions.swift */,
+				FE5B0DF124FE361900CE19F5 /* GHVehicleType.swift */,
+				FE5B0DF224FE361900CE19F5 /* GHDecoder.swift */,
+				FE5B0DF324FE361900CE19F5 /* GHRouteWeighting.swift */,
+			);
+			path = "Route Modals";
+			sourceTree = "<group>";
+		};
 		FE61BE7424FCD9B3005A8498 = {
 			isa = PBXGroup;
 			children = (
 				FE61BE8024FCD9B3005A8498 /* BaatoSwift */,
 				FE61BE7F24FCD9B3005A8498 /* Products */,
+				0399582FFE5799317466422A /* Pods */,
+				9442B34F2EF242B56D25F127 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -46,6 +168,8 @@
 		FE61BE8024FCD9B3005A8498 /* BaatoSwift */ = {
 			isa = PBXGroup;
 			children = (
+				FE5B0DE424FE361900CE19F5 /* API */,
+				FE5B0DE724FE361900CE19F5 /* Model */,
 				FE61BE8124FCD9B3005A8498 /* BaatoSwift.h */,
 				FE61BE8224FCD9B3005A8498 /* Info.plist */,
 			);
@@ -70,10 +194,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FE61BE8624FCD9B3005A8498 /* Build configuration list for PBXNativeTarget "BaatoSwift" */;
 			buildPhases = (
+				A72AFC0D7FEA325A3794E561 /* [CP] Check Pods Manifest.lock */,
 				FE61BE7924FCD9B3005A8498 /* Headers */,
 				FE61BE7A24FCD9B3005A8498 /* Sources */,
 				FE61BE7B24FCD9B3005A8498 /* Frameworks */,
 				FE61BE7C24FCD9B3005A8498 /* Resources */,
+				FE992173250A1DF90011B4ED /* ShellScript */,
+				FE99217D250A2DE90011B4ED /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -121,16 +248,75 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE5B0DF824FE361900CE19F5 /* API.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A72AFC0D7FEA325A3794E561 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BaatoSwift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE992173250A1DF90011B4ED /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FE61BE7A24FCD9B3005A8498 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE5B0DFE24FE361900CE19F5 /* CLExtensions.swift in Sources */,
+				FE5B0E0124FE361900CE19F5 /* GHRouteOptions.swift in Sources */,
+				FE5B0DFB24FE361900CE19F5 /* GHRouteAlgorithm.swift in Sources */,
+				FE5B0E0224FE361900CE19F5 /* GHVehicleType.swift in Sources */,
+				FE5B0DFF24FE361900CE19F5 /* GHBoundingBox.swift in Sources */,
+				FE5B0E0524FE361900CE19F5 /* NavResponse.swift in Sources */,
+				FE5B0E0324FE361900CE19F5 /* GHDecoder.swift in Sources */,
+				FE5B0DFC24FE361900CE19F5 /* GHRouting.swift in Sources */,
+				FE5B0E0624FE361900CE19F5 /* SearchResult.swift in Sources */,
+				FE5B0E0724FE361900CE19F5 /* Place.swift in Sources */,
+				FE5B0DF924FE361900CE19F5 /* API.swift in Sources */,
+				FE5B0DFA24FE361900CE19F5 /* GHRoutePath.swift in Sources */,
+				FE5B0E0424FE361900CE19F5 /* GHRouteWeighting.swift in Sources */,
+				FE5B0DFD24FE361900CE19F5 /* GHInstructionSign.swift in Sources */,
+				FE5B0E0824FE361900CE19F5 /* ResponseType.swift in Sources */,
+				FE5B0E0024FE361900CE19F5 /* GHInstruction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,13 +374,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s x86_64 i386";
+				"VALID_ARCHS[sdk=*]" = "arm64 arm64e armv7 armv7s x86_64 i386";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -245,13 +433,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s x86_64 i386";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -259,7 +449,9 @@
 		};
 		FE61BE8724FCD9B3005A8498 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C004AF94D83B554692E4B33 /* Pods-BaatoSwift.debug.xcconfig */;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = DTCKQRUUGB;
@@ -268,22 +460,27 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = BaatoSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobera.BaatoSwift;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s x86_64";
 			};
 			name = Debug;
 		};
 		FE61BE8824FCD9B3005A8498 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA5DAA5FEC04E2E71012E0B2 /* Pods-BaatoSwift.release.xcconfig */;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = DTCKQRUUGB;
@@ -292,16 +489,19 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = BaatoSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobera.BaatoSwift;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s x86_64";
 			};
 			name = Release;
 		};

@@ -1,0 +1,6 @@
+module Pods_BaatoSwift {
+  umbrella header "Pods-BaatoSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}

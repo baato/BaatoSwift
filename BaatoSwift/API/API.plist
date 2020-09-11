@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>search</key>
+	<string>/search</string>
+	<key>reverse</key>
+	<string>/reverse</string>
+	<key>places</key>
+	<string>/places</string>
+	<key>directions</key>
+	<string>/directions</string>
+	<key>mapstyle</key>
+	<string>/styles</string>
+	<key>root</key>
+	<string>/api/v1</string>
+	<key>base</key>
+	<string>https://api-staging.baato.io</string>
+</dict>
+</plist>

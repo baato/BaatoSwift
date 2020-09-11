@@ -1,0 +1,25 @@
+PODS:
+  - Alamofire (5.2.2)
+  - geos (5.0.0)
+  - GEOSwift (7.1.0):
+    - geos (~> 5.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.2)
+  - geos
+  - GEOSwift
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - geos
+    - GEOSwift
+
+SPEC CHECKSUMS:
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  geos: e91fba0bb3497e3a8e68ca6103bddd45ec548e06
+  GEOSwift: 94dee5b6f18cac925ca9dd81b52a76628808d4ef
+
+PODFILE CHECKSUM: b4aa5b19af415b403812d4a6656a30cd6816d970
+
+COCOAPODS: 1.9.3

@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 //! Project version number for BaatoSwift.
 FOUNDATION_EXPORT double BaatoSwiftVersionNumber;
 
