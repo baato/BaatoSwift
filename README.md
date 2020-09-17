@@ -33,13 +33,6 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     // Set token
      let baato = BaatoSwift.API.init(token: "BaatoToken")
-     
-     // Can also change baseURL,
-     /*
-      baseURLProd = "https://api.baato.io/api/v1"
-      baseURLStag = "https://api-staging.baato.io/api/v1"
-      let baato = BaatoSwift.API.init(baseURL: baseURL, token: "BaatoToken")
-      */
       }
   }
 }
@@ -48,6 +41,9 @@ class ViewController: UIViewController {
 #### Integrating Search
 
 ```
+ // Initialize Baato
+     let baato = BaatoSwift.API.init(token: "BaatoToken")
+     
       // required parameters for search
       baato.searchQuery = "SearchQuery"
       
@@ -77,6 +73,9 @@ class ViewController: UIViewController {
 #### Integrating Place
 
 ```
+     // Initialize Baato
+     let baato = BaatoSwift.API.init(token: "BaatoToken")
+     
       // required param for place
       baato.placeId = placeId
       
@@ -89,12 +88,15 @@ class ViewController: UIViewController {
 ```
 #### Integrating Reverse Geo-code
 ```
-      // required parameters for reverse
+     // Initialize Baato
+     let baato = BaatoSwift.API.init(token: "BaatoToken")
+     
+     // required parameters for reverse
       baato.reverseLat = latitude
       baato.reverseLon = longitude
       
       //place result
-      baato.reverseLon { (data) in
+      baato.getReverse { (data) in
                 // data is the place object.
                 print(data?.address, data?.name)
       }
@@ -103,15 +105,18 @@ class ViewController: UIViewController {
 
 #### Integrating Directions
 ```
-      // required parameters for reverse
-      baato.startLat = startingLatitude
-      baato.startLon = startingLongitude
-      baato.destLat = destinationLatitude
-      baato.destLon = destinationLongitude
+     // Initialize Baato
+      let baato = BaatoSwift.API.init(token: "BaatoToken")
+     
+     // setup start and end point, these are required prameters
+      baato.startLat = 27.73405
+      baato.startLon = 85.33685
+      baato.destLat = 27.7177
+      baato.destLon = 85.3278
       
       // optional parameters
       
-      // Mode is an enum defined in BaatoSwift
+      // Mode is an enum defined in BaatoSwift, we support bike, car and foot for navigation. 
       baato.navMode = BaatoSwift.NavigationMode.bike
       
       baato.navAlternatives = false
