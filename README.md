@@ -61,10 +61,10 @@ class ViewController: UIViewController {
       baato.searchLon= 85.3240 
       
       // search type
-      baato.searchType= "hospital" //optional type
+      baato.searchType= "hospital"
       
       // search around certain radius from base co-ordinate
-      baato.searchRadius= 50 // optional
+      baato.searchRadius= 50 
       
       
       //search result
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
       
 ```
 
-#### Integrating Drections
+#### Integrating Directions
 ```
       // required parameters for reverse
       baato.startLat = startingLatitude
