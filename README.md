@@ -1,14 +1,14 @@
-# BaatoSwift
-BaatoSwift is an umbrella framework for consuming <a href="https://docs.baato.io/#/v1/about/getting_started">baato api</a> easily. This framework helps to integrate the following: 
-* Baato search api
-* Baato reverse geocoding api
-* Baato places api
-* Baato Directions api
+## Baato Swift Library {docsify-ignore}
 
-This framework is available through pods. To add BaatoSwift to your project, add the following to your podfile
+<div style="max-width:600px;">
 
-```
-source 'https://github.com/baato/BaatoPodSpec.git'
+The Baato Swift library makes it easy to integrate the Baato API into existing Android projects.
+
+This library is available as a CocoaPod. To integrate BaatoSwift to your project, add the following to your Podfile:
+
+</div>
+
+<pre><code class="language-swift">source 'https://github.com/baato/BaatoPodSpec.git'
 target '${YourApp}' do
   use_frameworks!
 
@@ -16,117 +16,119 @@ target '${YourApp}' do
   pod 'BaatoSwift', '~> ${LatestVersion}'
   
 end
+</code></pre>
 
-```
-Follow <a href = "https://cocoapods.org/"> official cocoapods </a> for setting pod to your project.
 
-## Getting Started
+### Usage examples
 
-#### Initializing
+Helper methods in BaatoSwift make it easy to perform API requests to Baato.
 
-You will need a token to start. Create an account in <a href = "https://baato.io/"> baato.io </a> for token.  
-```
-import BaatoSwift
+<div style="max-width:600px; margin-top:30px; ">
 
-class ViewController: UIViewController {
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Set token
-     let baato = BaatoSwift.API.init(token: "BaatoToken")
-      }
-  }
+#### Search API
+
+After initializing Baato with your access token, the `getSearch` method can be used to make requests to the Search API.
+
+</div>
+
+<pre><code class="language-swift">// Initialize Baato with your token
+let baatoClient = BaatoSwift.API.init(token: "YOUR_BAATO_ACCESS_TOKEN")
+
+// searchQuery is a required parameter
+baatoClient.searchQuery = "SearchQuery"
+
+// optional parameters
+// number of results to return 
+baatoClient.searchLimit = 10
+
+// latitude and longitude coordinates, for providing additional geographical context to the search. 
+baatoClient.searchLat= 27.7172 
+baatoClient.searchLon= 85.3240 
+
+// The type or category of results that the request should return. For example: hospital, cafe etc.
+baatoClient.searchType= "hospital"
+
+// radius, in kilometers from the specified lat/lon pair within which to look for results. Only integer values supported.
+baatoClient.searchRadius= 50 
+
+
+// Perform the search
+baatoClient.getSearch { (data) in
+    // response is a [SearchResult?] 
+    print(data?.first?.address, data?.first?.address)
 }
-```
+</code></pre>
 
-#### Integrating Search
 
-```
- // Initialize Baato
-     let baato = BaatoSwift.API.init(token: "BaatoToken")
-     
-      // required parameters for search
-      baato.searchQuery = "SearchQuery"
-      
-      // optional parameters
-      
-      // number of search result 
-      baato.searchLimit = 10
-      
-      // search result base co-ordinate
-      baato.searchLat= 27.7172 
-      baato.searchLon= 85.3240 
-      
-      // search type
-      baato.searchType= "hospital"
-      
-      // search around certain radius from base co-ordinate
-      baato.searchRadius= 50 
-      
-      
-      //search result
-      baato.getSearch { (data) in
-                // data is the list of search result object i.e, [SearchResult]?.
-                print(data?.first?.address, data?.first?.address)
-      }
-```
+<div style="max-width:600px; margin-top:30px; ">
 
-#### Integrating Place
+#### Reverse Search API
 
-```
-     // Initialize Baato
-     let baato = BaatoSwift.API.init(token: "BaatoToken")
-     
-      // required param for place
-      baato.placeId = placeId
-      
-      //place result
-      baato.getPlaces { (data) in
-                // data is the place object i.e, Place?.
-                print(data?.address, data?.centroid)
-      }
-      
-```
-#### Integrating Reverse Geo-code
-```
-     // Initialize Baato
-     let baato = BaatoSwift.API.init(token: "BaatoToken")
-     
-     // required parameters for reverse
-      baato.reverseLat = latitude
-      baato.reverseLon = longitude
-      
-      //place result
-      baato.getReverse { (data) in
-                // data is the place object i.e, Place?.
-                print(data?.address, data?.name)
-      }
-      
-```
+After initializing Baato with your access token, the `getReverse` method can be used to make requests to the Reverse Search API.
 
-#### Integrating Directions
-```
-     // Initialize Baato
-      let baato = BaatoSwift.API.init(token: "BaatoToken")
-     
-     // setup start and end point, these are required prameters
-      baato.startLat = 27.73405
-      baato.startLon = 85.33685
-      baato.destLat = 27.7177
-      baato.destLon = 85.3278
+</div>
+
+<pre><code class="language-swift">// Initialize Baato with your token
+let baatoClient = BaatoSwift.API.init(token: "YOUR_BAATO_ACCESS_TOKEN")
+
+// reverseLat and reverseLon are required parameters
+baatoClient.reverseLat = latitude
+baatoClient.reverseLon = longitude
+
+// Perform the reversh search request
+baatoClient.getReverse { (data) in
+        // response is a Place object
+        print(data?.address, data?.name)
+}
+</code></pre>
+
+
+#### Places API
+
+After initializing Baato with your access token, the `getPlaces` method can be used to make requests to the Places API.
+
+</div>
+
+<pre><code class="language-swift">// Initialize Baato with your token
+let baatoClient = BaatoSwift.API.init(token: "YOUR_BAATO_ACCESS_TOKEN")
+
+// placeId is a required parameter
+baatoClient.placeId = placeId
+
+// Perform the place lookup
+baatoClient.getPlaces { (data) in
+        // response is a Place object
+        print(data?.address, data?.centroid)
+}
       
-      // optional parameters
-      
-      // Mode is an enum defined in BaatoSwift, we support bike, car and foot for navigation. 
-      baato.navMode = BaatoSwift.NavigationMode.bike
-      
-      baato.navAlternatives = false
-      baato.navInstructions = true
-    
-      
-      
-      //Direction results
-      baato.getDirections { (data) in
-                // NavigationResponse Object i.e, NavResponse?
-      }
-      
-```
+
+</code></pre>
+
+#### Directions API
+
+After initializing Baato with your access token, the `getDirections` method can be used to make requests to the Directions API.
+
+</div>
+
+<pre><code class="language-swift">// Initialize Baato with your token
+let baatoClient = BaatoSwift.API.init(token: "YOUR_BAATO_ACCESS_TOKEN")
+
+// startLat, startLon, destLat, destLon, navMode are all required parameters
+baatoClient.startLat = 27.73405
+baatoClient.startLon = 85.33685
+baatoClient.destLat = 27.7177
+baatoClient.destLon = 85.3278
+
+// Mode is the vehicle profilespecified is an enum with the following values: bike, car and foot
+baatoClient.navMode = BaatoSwift.NavigationMode.bike
+
+// specify if you need alternative routes (ounly spports two points), or instructions to be included in your responce 
+baatoClient.navAlternatives = false
+baatoClient.navInstructions = true
+
+
+// Perform the directions request
+baatoClient.getDirections { (data) in
+        // response is a NavigationResponse object
+}
+</code></pre>
