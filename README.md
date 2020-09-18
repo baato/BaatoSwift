@@ -65,7 +65,7 @@ class ViewController: UIViewController {
       
       //search result
       baato.getSearch { (data) in
-                // data is the list of search result object.
+                // data is the list of search result object i.e, [SearchResult]?.
                 print(data?.first?.address, data?.first?.address)
       }
 ```
@@ -81,7 +81,7 @@ class ViewController: UIViewController {
       
       //place result
       baato.getPlaces { (data) in
-                // data is the place object.
+                // data is the place object i.e, Place?.
                 print(data?.address, data?.centroid)
       }
       
@@ -97,7 +97,7 @@ class ViewController: UIViewController {
       
       //place result
       baato.getReverse { (data) in
-                // data is the place object.
+                // data is the place object i.e, Place?.
                 print(data?.address, data?.name)
       }
       
@@ -126,7 +126,7 @@ class ViewController: UIViewController {
       
       //Direction results
       baato.getDirections { (data) in
-                // NavigationResponse Object
+                // NavigationResponse Object i.e, NavResponse?
       }
       
 ```
