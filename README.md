@@ -1,8 +1,8 @@
-## Baato Swift Library {docsify-ignore}
+# Baato Swift Library
 
 <div style="max-width:600px;">
 
-The Baato Swift library makes it easy to integrate the Baato API into existing Android projects.
+The Baato Swift library makes it easy to integrate the [Baato](https://baato.io) API into existing Android projects.
 
 This library is available as a CocoaPod. To integrate BaatoSwift to your project, add the following to your Podfile:
 
