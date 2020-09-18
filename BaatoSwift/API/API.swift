@@ -362,7 +362,7 @@ extension API {
                         do {
                             place = try value.data.decode(Place.self)
                         } catch {
-                            self.reportErrorFetching("Place", reason: "could not deserialize")
+                            self.reportErrorFetching("Reverse", reason: "could not deserialize")
                             completion(nil)
                         }
                 case .failure:
@@ -400,29 +400,31 @@ extension API {
             }
         }
     }
-    public func getDirections(completion: @escaping(NavResponse?) -> Void) {
+    public func getDirections(completion: @escaping([NavResponse]?) -> Void) {
     mapQueryReverse()
     let filter = requestParameters
     let request = AF.request(directions!, method: .get, parameters: filter)
             request.validate(contentType: ["application/json"])
             request.responseJSON { response in
-                var place: NavResponse?
-                defer {
-                    completion(place)
-                }
+               var navResponse: [NavResponse]?
                 switch response.result {
                 case .success:
                     guard let data = response.data, let value = try? JSONDecoder().decode(ResponseType.self, from: data) else {
                         os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
                         return
                     }
+                    while !value.data.isAtEnd {
                         do {
-                            place = try value.data.decode(NavResponse.self)
+                            if navResponse == nil {
+                                navResponse = [NavResponse]()
+                            }
+                            let navData = try value.data.decode(NavResponse.self)
+                            navResponse!.append(navData)
                         } catch {
-                            self.reportErrorFetching("Place", reason: "could not deserialize")
-                            completion(nil)
-    //                        return
+                            self.reportErrorFetching("Navigation", reason: "could not deserialize")
                         }
+                    }
+                    completion(navResponse)
 
                 case .failure:
                     os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
