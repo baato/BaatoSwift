@@ -15,6 +15,6 @@
 	<key>root</key>
 	<string>/api/v1</string>
 	<key>base</key>
-	<string>https://api-staging.baato.io</string>
+	<string>https://api.baato.io</string>
 </dict>
 </plist>

@@ -313,17 +313,18 @@ public class API {
     }
 }
 extension API {
-    public func getSearch(completion: @escaping([SearchResult]?) -> Void) {
+    public func getSearch(completion: @escaping(Result<[SearchResult]?,Error>) -> Void) {
         mapQuerySearch()
         let searchFilter = requestParameters
         let request = AF.request(search!, method: .get, parameters: searchFilter)
+        request.validate(statusCode: 200..<300)
         request.validate(contentType: ["application/json"])
         request.responseJSON { response in
             var searchResult: [SearchResult]?
             switch response.result {
             case .success:
                 guard let data = response.data, let value = try? JSONDecoder().decode(ResponseType.self, from: data) else {
-                    os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
+                    completion(.failure(BaatoError.emptyResponse))
                     return
                 }
                 while !value.data.isAtEnd {
@@ -334,82 +335,89 @@ extension API {
                         let searchData = try value.data.decode(SearchResult.self)
                         searchResult!.append(searchData)
                     } catch {
+                        completion(.failure(BaatoError.parseError))
                         self.reportErrorFetching("Search", reason: "could not deserialize")
                     }
                 }
-                completion(searchResult)
+                completion(.success(searchResult))
+//                completion(searchResult)
             case .failure:
+                completion(.failure(response.error!))
                 os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
             }
         }
     }
-    public func getReverse(completion: @escaping(Place?) -> Void) {
+    public func getReverse(completion: @escaping(Result<Place?, Error>) -> Void) {
             mapQueryReverse()
             let filter = requestParameters
             let request = AF.request(reverse!, method: .get, parameters: filter)
+            request.validate(statusCode: 200..<300)
             request.validate(contentType: ["application/json"])
             request.responseJSON { response in
                 var place: Place?
-                defer {
-                    completion(place)
-                }
                 switch response.result {
                 case .success:
                     guard let data = response.data, let value = try? JSONDecoder().decode(ResponseType.self, from: data) else {
+                        completion(.failure(BaatoError.emptyResponse))
                         os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
                         return
                     }
                         do {
                             place = try value.data.decode(Place.self)
+                            completion(.success(place))
                         } catch {
+                            completion(.failure(BaatoError.parseError))
                             self.reportErrorFetching("Reverse", reason: "could not deserialize")
-                            completion(nil)
                         }
                 case .failure:
+                    completion(.failure(response.error!))
                     os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
                 }
             }
 
     }
-    public func getPlaces(completion: @escaping(Place?) -> Void) {
+    public func getPlaces(completion: @escaping(Result<Place?,Error>) -> Void) {
         mapQueryPlace()
         let filter = requestParameters
         let request = AF.request(places!, method: .get, parameters: filter)
+        request.validate(statusCode: 200..<300)
         request.validate(contentType: ["application/json"])
         request.responseJSON { response in
             var place: Place?
-            defer {
-                completion(place)
-            }
             switch response.result {
             case .success:
                 guard let data = response.data, let value = try? JSONDecoder().decode(ResponseType.self, from: data) else {
+                    completion(.failure(BaatoError.emptyResponse))
                     os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
                     return
                 }
                     do {
                         place = try value.data.decode(Place.self)
+                        completion(.success(place))
                     } catch {
+                        completion(.failure(BaatoError.parseError))
                         self.reportErrorFetching("Place", reason: "could not deserialize")
-                        completion(nil)
 //                        return
                     }
-                
+
             case .failure:
+                completion(.failure(response.error!))
                 os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
             }
         }
     }
-    public func getDirections(completion: @escaping([NavResponse]?) -> Void) {
+    public func getDirections(completion: @escaping(Result<[NavResponse]?,Error>) -> Void) {
     mapQueryReverse()
     let filter = requestParameters
     let request = AF.request(directions!, method: .get, parameters: filter)
+            request.validate(statusCode: 200..<300)
             request.validate(contentType: ["application/json"])
             request.responseJSON { response in
                var navResponse: [NavResponse]?
                 switch response.result {
                 case .success:
                     guard let data = response.data, let value = try? JSONDecoder().decode(ResponseType.self, from: data) else {
+                        completion(.failure(BaatoError.emptyResponse))
                         os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
                         return
                     }
@@ -421,12 +429,14 @@ extension API {
                             let navData = try value.data.decode(NavResponse.self)
                             navResponse!.append(navData)
                         } catch {
+                            completion(.failure(BaatoError.parseError))
                             self.reportErrorFetching("Navigation", reason: "could not deserialize")
                         }
                     }
-                    completion(navResponse)
+                    completion(.success(navResponse))
 
                 case .failure:
+                    completion(.failure(response.error!))
                     os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
                 }
             }
