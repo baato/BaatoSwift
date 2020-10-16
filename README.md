@@ -54,7 +54,7 @@ baatoClient.searchRadius= 50
 
 // Perform the search
 baatoClient.getSearch { (data) in
-    // response is a [SearchResult?] 
+    // response is a [SearchResult]? 
     print(data?.first?.address, data?.first?.address)
 }
 </code></pre>
@@ -122,13 +122,14 @@ baatoClient.destLon = 85.3278
 // Mode is the vehicle profilespecified is an enum with the following values: bike, car and foot
 baatoClient.navMode = BaatoSwift.NavigationMode.bike
 
-// specify if you need alternative routes (ounly spports two points), or instructions to be included in your responce 
+// specify if you need alternative routes (only spports two points), or instructions to be included in your responce 
 baatoClient.navAlternatives = false
 baatoClient.navInstructions = true
 
 
 // Perform the directions request
 baatoClient.getDirections { (data) in
-        // response is a NavigationResponse object
+        // response is a [NavResponse]?
+        print(data?.first?.distanceInMeters, data?.first?.timeInMs)
 }
 </code></pre>
