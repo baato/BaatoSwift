@@ -12,6 +12,11 @@ import os.log
 public enum NavigationMode {
     case car, bike, foot
 }
+// error enum
+public enum BaatoError: Error {
+     case emptyResponse
+     case parseError
+ }
 public class API {
     let base: String
     var root: String
@@ -42,13 +47,6 @@ public class API {
     var mode: NavigationMode?
     var alternatives: Bool?
     var instructions: Bool?
-
-    // error enum
-   public enum BaatoError: Error {
-        case emptyResponse
-        case parseError
-    }
-
 
 //    static let shared = API()
 //    public var initAPI: (baseURL: String?, token: String) {
