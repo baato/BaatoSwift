@@ -44,7 +44,7 @@ public class API {
     var instructions: Bool?
 
     // error enum
-    enum BaatoError: Error {
+   public enum BaatoError: Error {
         case emptyResponse
         case parseError
     }
