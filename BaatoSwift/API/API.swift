@@ -43,6 +43,12 @@ public class API {
     var alternatives: Bool?
     var instructions: Bool?
 
+    // error enum
+    enum BaatoError: Error {
+        case emptyResponse
+        case parseError
+    }
+
 
 //    static let shared = API()
 //    public var initAPI: (baseURL: String?, token: String) {
