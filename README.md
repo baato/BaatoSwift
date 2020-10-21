@@ -53,9 +53,17 @@ baatoClient.searchRadius= 50
 
 
 // Perform the search
-baatoClient.getSearch { (data) in
-    // response is a [SearchResult]? 
-    print(data?.first?.address, data?.first?.address)
+baatoClient.getSearch { (result) in
+                switch result {
+                case .success(let data):
+                // response is a [SearchResult]? 
+                print(data?.first?.address, data?.first?.address)
+                    guard let data = data else {
+                        return
+                    }                    
+                case .failure(let error):
+                    print(error)
+                }
 }
 </code></pre>
 
@@ -76,9 +84,14 @@ baatoClient.reverseLat = latitude
 baatoClient.reverseLon = longitude
 
 // Perform the reversh search request
-baatoClient.getReverse { (data) in
-        // response is a Place object
-        print(data?.address, data?.name)
+baatoClient.getReverse {  (result) in
+                switch result{
+                case .success(let data):
+                  // response is a Place object
+                  print(data?.address, data?.name)
+                case .failure(let error):
+                    print(error)
+                }
 }
 </code></pre>
 
@@ -96,9 +109,14 @@ let baatoClient = BaatoSwift.API.init(token: "YOUR_BAATO_ACCESS_TOKEN")
 baatoClient.placeId = placeId
 
 // Perform the place lookup
-baatoClient.getPlaces { (data) in
-        // response is a Place object
-        print(data?.address, data?.centroid)
+baatoClient.getPlaces {  (result) in
+                switch result{
+                case .success(let data):
+                  // response is a Place object
+                  print(data?.address, data?.name)
+                case .failure(let error):
+                    print(error)
+                }
 }
       
 
@@ -128,8 +146,13 @@ baatoClient.navInstructions = true
 
 
 // Perform the directions request
-baatoClient.getDirections { (data) in
-        // response is a [NavResponse]?
-        print(data?.first?.distanceInMeters, data?.first?.timeInMs)
+baatoClient.getDirections {(result) in
+                switch result{
+                case .success(let data):
+                  // response is a [NavResponse]?
+                  print(data?.first?.distanceInMeters, data?.first?.timeInMs)
+                case .failure(let error):
+                    print(error)
+                }
 }
 </code></pre>
