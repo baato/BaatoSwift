@@ -178,16 +178,16 @@ public class API {
        }
     public var destLat: Double {
            get {
-            return sLat ?? 0.00
+            return dLat ?? 0.00
            } set(lat) {
-               self.sLat = lat
+               self.dLat = lat
            }
        }
        public var destLon : Double {
            get {
-               return sLon ?? 0.00
+               return dLon ?? 0.00
            } set(lon) {
-               self.sLon = lon
+               self.dLon = lon
            }
        }
     public var navMode: NavigationMode {
@@ -411,7 +411,7 @@ extension API {
         }
     }
     public func getDirections(completion: @escaping(Result<[NavResponse]?,Error>) -> Void) {
-    mapQueryReverse()
+    mapQueryDirections()
     let filter = requestParameters
     let request = AF.request(directions!, method: .get, parameters: filter)
             request.validate(statusCode: 200..<300)
@@ -451,3 +451,4 @@ extension API {
         os_log("Error fetching %@%@: %@", log: OSLog.default, type: .error, type, identifier != nil ? " \(identifier!)" : "", reason)
     }
 }
+

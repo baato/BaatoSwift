@@ -13,7 +13,7 @@ public class NavResponse: Codable {
     public let distanceInMeters: Double
     public let encodedPolyline: String
     public let timeInMs: CLong
-    public let instructionList: UnkeyedDecodingContainer
+    var instructionList: UnkeyedDecodingContainer?
 
     enum CodingKeys: String, CodingKey {
         case routeWeight, distanceInMeters, encodedPolyline, timeInMs, instructionList
@@ -44,15 +44,15 @@ public class NavResponse: Codable {
         distanceInMeters = try container.decode(Double.self, forKey: .distanceInMeters)
         encodedPolyline = try container.decode(String.self, forKey: .encodedPolyline)
         timeInMs = try container.decode(CLong.self, forKey: .timeInMs)
-        instructionList = try container.nestedUnkeyedContainer(forKey: .instructionList)
+//        instructionList = try container.nestedUnkeyedContainer(forKey: .instructionList)
     }
 
-    func encode(with aCoder: NSCoder) {
+    public func encode(with aCoder: NSCoder) {
         aCoder.encode(routeWight, forKey: CodingKeys.routeWeight.rawValue)
         aCoder.encode(distanceInMeters, forKey: CodingKeys.distanceInMeters.rawValue)
         aCoder.encode(encodedPolyline, forKey: CodingKeys.encodedPolyline.rawValue)
         aCoder.encode(timeInMs, forKey: CodingKeys.timeInMs.rawValue)
-        aCoder.encode(instructionList, forKey: CodingKeys.instructionList.rawValue)
+//        instructionList = aCoder.encode(instructionList, forKey: CodingKeys.instructionList.rawValue) as? UnkeyedDecodingContainer
     }
 
 }
