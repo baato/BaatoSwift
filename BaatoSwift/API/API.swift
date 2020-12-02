@@ -18,8 +18,8 @@ public enum BaatoError: Error {
      case parseError
  }
 public class API {
-    let base: String
-    var root: String
+    var base: String = "https://api.baato.io"
+    var root: String!
     var search: String!
     var reverse: String!
     var places: String!
@@ -70,32 +70,30 @@ public class API {
 //        }
 //    }
     public init(baseURL: String?, token: String) {
-        let resourcePath = Bundle.main.path(forResource: "API", ofType: "plist")!
-        let paths = NSDictionary(contentsOfFile: resourcePath)
-        self.base = paths!["base"] as! String
+        self.base = "https://api.baato.io"
         if let api = baseURL {
             self.root = api
         } else {
-            self.root = base + (paths!["root"] as! String)
+            self.root = base + "/api/v1"
         }
         self.token = token
-        self.search = root + (paths!["search"] as! String)
-        self.reverse = root + (paths!["reverse"] as! String)
-        self.places = root + (paths!["places"] as! String)
-        self.directions = root + (paths!["directions"] as! String)
-        self.mapstyle = root + (paths!["mapstyle"] as! String)
+        self.search = root + "/search"
+        self.reverse = root + "/reverse"
+        self.places = root + "/places"
+        self.directions = root + "/directions"
+        self.mapstyle = root + "/styles"
     }
     public init(token: String) {
-        let resourcePath = Bundle.main.path(forResource: "API", ofType: "plist")!
-        let paths = NSDictionary(contentsOfFile: resourcePath)
-        self.base = paths!["base"] as! String
-        self.root = base + (paths!["root"] as! String)
+//        let resourcePath = Bundle.main.path(forResource: "API", ofType: "plist")!
+//        let paths = NSDictionary(contentsOfFile: resourcePath)
+        self.base = "https://api.baato.io"
+        self.root = base + "/api/v1"
         self.token = token
-        self.search = root + (paths!["search"] as! String)
-        self.reverse = root + (paths!["reverse"] as! String)
-        self.places = root + (paths!["places"] as! String)
-        self.directions = root + (paths!["directions"] as! String)
-        self.mapstyle = root + (paths!["mapstyle"] as! String)
+        self.search = root + "/search"
+        self.reverse = root + "/reverse"
+        self.places = root + "/places"
+        self.directions = root + "/directions"
+        self.mapstyle = root + "/styles"
     }
     public var searchQuery: String {
         get {
@@ -213,15 +211,13 @@ public class API {
     }
 
     init() {
-        let resourcePath = Bundle.main.path(forResource: "API", ofType: "plist")!
-        let paths = NSDictionary(contentsOfFile: resourcePath)
-        base = paths!["base"] as! String
-        root = base + (paths!["root"] as! String)
-        self.search = root + (paths!["search"] as! String)
-        self.reverse = root + (paths!["reverse"] as! String)
-        self.places = root + (paths!["places"] as! String)
-        self.directions = root + (paths!["directions"] as! String)
-        self.mapstyle = root + (paths!["mapstyle"] as! String)
+        self.base = "https://api.baato.io"
+        self.root = base + "/api/v1"
+        self.search = root + "/search"
+        self.reverse = root + "/reverse"
+        self.places = root + "/places"
+        self.directions = root + "/directions"
+        self.mapstyle = root + "/styles"
     }
     fileprivate func freshInitialize()-> Void {
         requestParameters.removeAll()
@@ -445,10 +441,10 @@ extension API {
                 }
             }
     }
+
     public func getmapstyle(){
     }
     fileprivate func reportErrorFetching(_ type: String, identifier: Int? = nil, reason: String) {
         os_log("Error fetching %@%@: %@", log: OSLog.default, type: .error, type, identifier != nil ? " \(identifier!)" : "", reason)
     }
 }
-
