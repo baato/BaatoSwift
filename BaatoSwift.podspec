@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "BaatoSwift"
-  spec.version      = "0.1.4"
+  spec.version      = "0.1.6"
   spec.summary      = "This framework help to consume baato api."
   spec.description  = <<-DESC
   Baato Swift is a framework developed for consuming the baato api efficiently.
@@ -23,8 +23,8 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
   spec.swift_version = "5"
 # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  spec.dependency "Alamofire", "~> 5.2"
-  spec.dependency "GEOSwift"
-  spec.dependency "geos"
+# spec.dependency "Alamofire", "~> 5.2"
+# spec.dependency "GEOSwift"
+# spec.dependency "geos"
 
 end

@@ -8,6 +8,8 @@
 
 import Foundation
 import Alamofire
+import MapboxDirections
+import MapboxCoreNavigation
 import os.log
 public enum NavigationMode {
     case car, bike, foot
@@ -18,8 +20,8 @@ public enum BaatoError: Error {
      case parseError
  }
 public class API {
-    let base: String
-    var root: String
+    var base: String = "https://api.baato.io"
+    var root: String!
     var search: String!
     var reverse: String!
     var places: String!
@@ -70,32 +72,30 @@ public class API {
 //        }
 //    }
     public init(baseURL: String?, token: String) {
-        let resourcePath = Bundle.main.path(forResource: "API", ofType: "plist")!
-        let paths = NSDictionary(contentsOfFile: resourcePath)
-        self.base = paths!["base"] as! String
+        self.base = "https://api.baato.io"
         if let api = baseURL {
             self.root = api
         } else {
-            self.root = base + (paths!["root"] as! String)
+            self.root = base + "/api/v1"
         }
         self.token = token
-        self.search = root + (paths!["search"] as! String)
-        self.reverse = root + (paths!["reverse"] as! String)
-        self.places = root + (paths!["places"] as! String)
-        self.directions = root + (paths!["directions"] as! String)
-        self.mapstyle = root + (paths!["mapstyle"] as! String)
+        self.search = root + "/search"
+        self.reverse = root + "/reverse"
+        self.places = root + "/places"
+        self.directions = root + "/directions"
+        self.mapstyle = root + "/styles"
     }
     public init(token: String) {
-        let resourcePath = Bundle.main.path(forResource: "API", ofType: "plist")!
-        let paths = NSDictionary(contentsOfFile: resourcePath)
-        self.base = paths!["base"] as! String
-        self.root = base + (paths!["root"] as! String)
+//        let resourcePath = Bundle.main.path(forResource: "API", ofType: "plist")!
+//        let paths = NSDictionary(contentsOfFile: resourcePath)
+        self.base = "https://api.baato.io"
+        self.root = base + "/api/v1"
         self.token = token
-        self.search = root + (paths!["search"] as! String)
-        self.reverse = root + (paths!["reverse"] as! String)
-        self.places = root + (paths!["places"] as! String)
-        self.directions = root + (paths!["directions"] as! String)
-        self.mapstyle = root + (paths!["mapstyle"] as! String)
+        self.search = root + "/search"
+        self.reverse = root + "/reverse"
+        self.places = root + "/places"
+        self.directions = root + "/directions"
+        self.mapstyle = root + "/styles"
     }
     public var searchQuery: String {
         get {
@@ -213,15 +213,13 @@ public class API {
     }
 
     init() {
-        let resourcePath = Bundle.main.path(forResource: "API", ofType: "plist")!
-        let paths = NSDictionary(contentsOfFile: resourcePath)
-        base = paths!["base"] as! String
-        root = base + (paths!["root"] as! String)
-        self.search = root + (paths!["search"] as! String)
-        self.reverse = root + (paths!["reverse"] as! String)
-        self.places = root + (paths!["places"] as! String)
-        self.directions = root + (paths!["directions"] as! String)
-        self.mapstyle = root + (paths!["mapstyle"] as! String)
+        self.base = "https://api.baato.io"
+        self.root = base + "/api/v1"
+        self.search = root + "/search"
+        self.reverse = root + "/reverse"
+        self.places = root + "/places"
+        self.directions = root + "/directions"
+        self.mapstyle = root + "/styles"
     }
     fileprivate func freshInitialize()-> Void {
         requestParameters.removeAll()
@@ -313,6 +311,34 @@ public class API {
         } else {
             requestParameters["alternatives"] = false
         }
+         //optionals
+    }
+    fileprivate func mapboxQueryDirections()-> Void {
+        //Required
+        freshInitialize()
+        guard let sLat = sLat, let sLon = sLon, let dLat = dLat, let dLon = dLon else {
+            os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Route Query", "Start and End Coordinates are required")
+            return
+        }
+        let points: [String] = ["\(sLat)," + "\(sLon)", "\(dLat)," + "\(dLon)"]
+        requestParameters["points"] = points
+        if let mode = mode {
+            requestParameters["mode"] = mode
+        } else {
+            requestParameters["mode"] = NavigationMode.car
+        }
+        if let alternatives = alternatives {
+            requestParameters["alternatives"] = alternatives
+        } else {
+            requestParameters["alternatives"] = false
+        }
+        if let instructions = instructions {
+            requestParameters["instructions"] = instructions
+        } else {
+            requestParameters["instructions"] = false
+        }
+        requestParameters["forMapbox"] = true
+        requestParameters["locale"] = "en_US"
          //optionals
     }
 }
@@ -445,10 +471,33 @@ extension API {
                 }
             }
     }
+    public func getMapboxDirections(completion: @escaping(Result<Data?,Error>) -> Void) {
+        mapboxQueryDirections()
+    let filter = requestParameters
+    let request = AF.request(directions!, method: .get, parameters: filter)
+            request.validate(statusCode: 200..<300)
+            request.validate(contentType: ["application/json"])
+            request.responseJSON { response in
+                switch response.result {
+                case .success:
+
+                    guard let data = response.data else {
+                        completion(.failure(BaatoError.parseError))
+                        os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
+                        return
+                    }
+                    completion(.success(data))
+
+                case .failure:
+                    completion(.failure(response.error!))
+                    os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
+                }
+            }
+    }
+
     public func getmapstyle(){
     }
     fileprivate func reportErrorFetching(_ type: String, identifier: Int? = nil, reason: String) {
         os_log("Error fetching %@%@: %@", log: OSLog.default, type: .error, type, identifier != nil ? " \(identifier!)" : "", reason)
     }
 }
-
