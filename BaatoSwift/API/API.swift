@@ -8,6 +8,8 @@
 
 import Foundation
 import Alamofire
+import MapboxDirections
+import MapboxCoreNavigation
 import os.log
 public enum NavigationMode {
     case car, bike, foot
@@ -311,6 +313,34 @@ public class API {
         }
          //optionals
     }
+    fileprivate func mapboxQueryDirections()-> Void {
+        //Required
+        freshInitialize()
+        guard let sLat = sLat, let sLon = sLon, let dLat = dLat, let dLon = dLon else {
+            os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Route Query", "Start and End Coordinates are required")
+            return
+        }
+        let points: [String] = ["\(sLat)," + "\(sLon)", "\(dLat)," + "\(dLon)"]
+        requestParameters["points"] = points
+        if let mode = mode {
+            requestParameters["mode"] = mode
+        } else {
+            requestParameters["mode"] = NavigationMode.car
+        }
+        if let alternatives = alternatives {
+            requestParameters["alternatives"] = alternatives
+        } else {
+            requestParameters["alternatives"] = false
+        }
+        if let instructions = instructions {
+            requestParameters["instructions"] = instructions
+        } else {
+            requestParameters["instructions"] = false
+        }
+        requestParameters["forMapbox"] = true
+        requestParameters["locale"] = "en_US"
+         //optionals
+    }
 }
 extension API {
     public func getSearch(completion: @escaping(Result<[SearchResult]?,Error>) -> Void) {
@@ -434,6 +464,29 @@ extension API {
                         }
                     }
                     completion(.success(navResponse))
+
+                case .failure:
+                    completion(.failure(response.error!))
+                    os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
+                }
+            }
+    }
+    public func getMapboxDirections(completion: @escaping(Result<Data?,Error>) -> Void) {
+        mapboxQueryDirections()
+    let filter = requestParameters
+    let request = AF.request(directions!, method: .get, parameters: filter)
+            request.validate(statusCode: 200..<300)
+            request.validate(contentType: ["application/json"])
+            request.responseJSON { response in
+                switch response.result {
+                case .success:
+
+                    guard let data = response.data else {
+                        completion(.failure(BaatoError.parseError))
+                        os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
+                        return
+                    }
+                    completion(.success(data))
 
                 case .failure:
                     completion(.failure(response.error!))
