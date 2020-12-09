@@ -8,8 +8,6 @@
 
 import Foundation
 import Alamofire
-import MapboxDirections
-import MapboxCoreNavigation
 import os.log
 public enum NavigationMode {
     case car, bike, foot
