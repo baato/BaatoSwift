@@ -156,3 +156,41 @@ baatoClient.getDirections {(result) in
                 }
 }
 </code></pre>
+
+#### Mapbox directions API
+
+After initializing Baato with your access token, the `getMapboxDirections` method can be used to make requests to the Directions API for consuming mapbox direction API.
+
+</div>
+
+<pre><code class="language-swift">// Initialize Baato with your token
+let baatoClient = BaatoSwift.API.init(token: "YOUR_BAATO_ACCESS_TOKEN")
+
+// startLat, startLon, destLat, destLon, navMode are all required parameters
+baatoClient.startLat = 27.73405
+baatoClient.startLon = 85.33685
+baatoClient.destLat = 27.7177
+baatoClient.destLon = 85.3278
+
+// Mode is the vehicle profilespecified is an enum with the following values: bike, car and foot
+baatoClient.navMode = BaatoSwift.NavigationMode.bike
+
+// specify if you need alternative routes (only spports two points), or instructions to be included in your responce 
+baatoClient.navAlternatives = false
+baatoClient.navInstructions = true
+
+
+// Perform the directions request
+baatoClient.getMapboxDirections{(result) in
+                switch result {
+                case .success (let data):
+                    guard let data = data else {
+                                return
+                    }
+                //data is mapbox consumable route response object see navigation example for more  
+                           
+                case .failure (let error) :
+                            print(error.localizedDescription)
+                }
+  }
+</code></pre>
