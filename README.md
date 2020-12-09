@@ -140,8 +140,10 @@ baatoClient.destLon = 85.3278
 // Mode is the vehicle profilespecified is an enum with the following values: bike, car and foot
 baatoClient.navMode = BaatoSwift.NavigationMode.bike
 
-// specify if you need alternative routes (only spports two points), or instructions to be included in your responce 
+// Specify if you need alternative routes (only spports two points)
 baatoClient.navAlternatives = false
+
+// for instructions optional
 baatoClient.navInstructions = true
 
 
@@ -175,8 +177,10 @@ baatoClient.destLon = 85.3278
 // Mode is the vehicle profilespecified is an enum with the following values: bike, car and foot
 baatoClient.navMode = BaatoSwift.NavigationMode.bike
 
-// specify if you need alternative routes (only spports two points), or instructions to be included in your responce 
+// Alternative routes are not supported for mapbox direction (also, only spports two points), optional parameter
 baatoClient.navAlternatives = false
+
+// instructions must be set true for mapbox navigation, required parameter
 baatoClient.navInstructions = true
 
 
@@ -187,7 +191,7 @@ baatoClient.getMapboxDirections{(result) in
                     guard let data = data else {
                                 return
                     }
-                //data is mapbox consumable route response object see navigation example for more  
+                //data is mapbox consumable route response object see baato navigation example for more  
                            
                 case .failure (let error) :
                             print(error.localizedDescription)
