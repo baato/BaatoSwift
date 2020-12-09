@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "BaatoSwift"
-  spec.version      = "0.1.7"
+  spec.version      = "0.1.8"
   spec.summary      = "This framework help to consume baato api."
   spec.description  = <<-DESC
   Baato Swift is a framework developed for consuming the baato api efficiently.
