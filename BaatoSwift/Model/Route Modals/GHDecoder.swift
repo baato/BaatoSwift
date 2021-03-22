@@ -1,13 +1,13 @@
 import CoreLocation
 
-internal final class DecoderPoly {
+public class DecoderPoly {
     /**
      Special handling for the decoding of the encoded points string.
      
      - paramter encoded: The encoded string of points.
      - paramter is3D: Specifies if the points in the encoded string also contains elevation.
      */
-    class func decodePoints(_ encoded: String, is3D: Bool = false) -> [CLLocationCoordinate2D] {
+    public class func decodePoints(_ encoded: String, is3D: Bool = false) -> [CLLocationCoordinate2D] {
         var points = [CLLocationCoordinate2D]()
         let enc = encoded.unicodeScalars
         let len = enc.count
