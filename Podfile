@@ -1,7 +1,7 @@
-platform :ios, '10.3'
+platform :ios, '9.0'
 
 target 'BaatoSwift' do
-  pod 'Alamofire', '~> 5.2'
+  pod 'Alamofire', '~> 4.0'
   pod 'geos', :modular_headers => true
   pod 'GEOSwift'
 end

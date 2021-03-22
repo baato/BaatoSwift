@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "BaatoSwift"
-  spec.version      = "0.1.8"
+  spec.version      = "0.1.9"
   spec.summary      = "This framework help to consume baato api."
   spec.description  = <<-DESC
   Baato Swift is a framework developed for consuming the baato api efficiently.
@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
 
   spec.author             = { "Bhawak Pokhrel" => "bhawak.pokhrel@gmail.com" }
 
-  spec.platform     = :ios, "10.3"
+  spec.platform     = :ios, "9.0"
 
   spec.source       = { :git => "https://github.com/baato/BaatoSwift.git", :tag => "#{spec.version}" }
 
@@ -21,9 +21,9 @@ Pod::Spec.new do |spec|
 #  spec.resources = "BaatoSwift/**/*.{plist}"
 
   spec.requires_arc = true
-  spec.swift_version = "5"
+  spec.swift_version = "4"
 # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  spec.dependency "Alamofire", "~> 5.2"
+  spec.dependency "Alamofire", "~> 4.0"
   spec.dependency "GEOSwift"
   spec.dependency "geos"
 

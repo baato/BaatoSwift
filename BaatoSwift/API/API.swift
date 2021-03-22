@@ -209,7 +209,6 @@ public class API {
             self.instructions = instructions
         }
     }
-
     init() {
         self.base = "https://api.baato.io"
         self.root = base + "/api/v1"
@@ -223,7 +222,12 @@ public class API {
         requestParameters.removeAll()
          //compulsory ones
          guard let token = token else {
-             os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Baato API", "Token Not Found")
+            if #available(iOS 10.0, *) {
+                os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Baato API", "Token Not Found")
+            } else {
+                print("Token Not Found");
+                // Fallback on earlier versions
+            }
              return
          }
         requestParameters["key"] = token
@@ -232,7 +236,11 @@ public class API {
         //Required
        freshInitialize()
         guard let query = query else {
-            os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Search Query", "No Query Parameters")
+            if #available(iOS 10.0, *) {
+                os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Search Query", "No Query Parameters")
+            } else {
+                print("No Query Parameters");
+            }
             return
         }
        requestParameters["q"] = query
@@ -258,11 +266,21 @@ public class API {
         //Required
         freshInitialize()
         guard let lat = lat else {
-            os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Reverse Query", "Latitide is required")
+            if #available(iOS 10.0, *) {
+                os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Reverse Query", "Latitide is required")
+            } else {
+                print("Latitide is required");
+                // Fallback on earlier versions
+            }
             return
         }
         guard let lon = lon else {
-            os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Reverse Query", "Longitude is required")
+            if #available(iOS 10.0, *) {
+                os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Reverse Query", "Longitude is required")
+            } else {
+                print("Longitude is required");
+                // Fallback on earlier versions
+            }
             return
         }
 
@@ -280,7 +298,12 @@ public class API {
         freshInitialize()
 
         guard let place = place else {
-            os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Place Query", "Place ID is required")
+            if #available(iOS 10.0, *) {
+                os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Place Query", "Place ID is required")
+            } else {
+                print("Place ID is required");
+                // Fallback on earlier versions
+            }
             return
         }
         requestParameters["placeId"] = place
@@ -289,7 +312,12 @@ public class API {
         //Required
         freshInitialize()
         guard let sLat = sLat, let sLon = sLon, let dLat = dLat, let dLon = dLon else {
-            os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Route Query", "Start and End Coordinates are required")
+            if #available(iOS 10.0, *) {
+                os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Route Query", "Start and End Coordinates are required")
+            } else {
+                print("Start and End Coordinates are required");
+                // Fallback on earlier versions
+            }
             return
         }
         let points: [String] = ["\(sLat)," + "\(sLon)", "\(dLat)," + "\(dLon)"]
@@ -315,7 +343,12 @@ public class API {
         //Required
         freshInitialize()
         guard let sLat = sLat, let sLon = sLon, let dLat = dLat, let dLon = dLon else {
-            os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Route Query", "Start and End Coordinates are required")
+            if #available(iOS 10.0, *) {
+                os_log("Error request %@%@: %@", log: OSLog.default, type: .error, "Invalid request", "Route Query", "Start and End Coordinates are required")
+            } else {
+                print("Start and End Coordinates are required");
+                // Fallback on earlier versions
+            }
             return
         }
         let points: [String] = ["\(sLat)," + "\(sLon)", "\(dLat)," + "\(dLon)"]
@@ -341,10 +374,10 @@ public class API {
     }
 }
 extension API {
-    public func getSearch(completion: @escaping(Result<[SearchResult]?,Error>) -> Void) {
+    public func getSearch(completion: @escaping(Result<[SearchResult]?>) -> Void) {
         mapQuerySearch()
         let searchFilter = requestParameters
-        let request = AF.request(search!, method: .get, parameters: searchFilter)
+        let request = Alamofire.request(search!, method: .get, parameters: searchFilter)
         request.validate(statusCode: 200..<300)
         request.validate(contentType: ["application/json"])
         request.responseJSON { response in
@@ -371,14 +404,19 @@ extension API {
 //                completion(searchResult)
             case .failure:
                 completion(.failure(response.error!))
-                os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
+                if #available(iOS 10.0, *) {
+                    os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
+                } else {
+                    print("[Refresh Request] Request failed");
+                    // Fallback on earlier versions
+                }
             }
         }
     }
-    public func getReverse(completion: @escaping(Result<Place?, Error>) -> Void) {
+    public func getReverse(completion: @escaping(Result<Place?>) -> Void) {
             mapQueryReverse()
             let filter = requestParameters
-            let request = AF.request(reverse!, method: .get, parameters: filter)
+            let request = Alamofire.request(reverse!, method: .get, parameters: filter)
             request.validate(statusCode: 200..<300)
             request.validate(contentType: ["application/json"])
             request.responseJSON { response in
@@ -387,7 +425,12 @@ extension API {
                 case .success:
                     guard let data = response.data, let value = try? JSONDecoder().decode(ResponseType.self, from: data) else {
                         completion(.failure(BaatoError.emptyResponse))
-                        os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
+                        if #available(iOS 10.0, *) {
+                            os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
+                        } else {
+                            print("[Refresh Request] Error parsing JSON");
+                            // Fallback on earlier versions
+                        }
                         return
                     }
                         do {
@@ -399,15 +442,20 @@ extension API {
                         }
                 case .failure:
                     completion(.failure(response.error!))
-                    os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
+                    if #available(iOS 10.0, *) {
+                        os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
+                    } else {
+                        print("[Refresh Request] Request failed");
+                        // Fallback on earlier versions
+                    }
                 }
             }
 
     }
-    public func getPlaces(completion: @escaping(Result<Place?,Error>) -> Void) {
+    public func getPlaces(completion: @escaping(Result<Place?>) -> Void) {
         mapQueryPlace()
         let filter = requestParameters
-        let request = AF.request(places!, method: .get, parameters: filter)
+        let request = Alamofire.request(places!, method: .get, parameters: filter)
         request.validate(statusCode: 200..<300)
         request.validate(contentType: ["application/json"])
         request.responseJSON { response in
@@ -416,7 +464,12 @@ extension API {
             case .success:
                 guard let data = response.data, let value = try? JSONDecoder().decode(ResponseType.self, from: data) else {
                     completion(.failure(BaatoError.emptyResponse))
-                    os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
+                    if #available(iOS 10.0, *) {
+                        os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
+                    } else {
+                        print("[Refresh Request] Error parsing JSON");
+                        // Fallback on earlier versions
+                    }
                     return
                 }
                     do {
@@ -430,14 +483,19 @@ extension API {
 
             case .failure:
                 completion(.failure(response.error!))
-                os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
+                if #available(iOS 10.0, *) {
+                    os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
+                } else {
+                    print("[Refresh Request] Request failed");
+                    // Fallback on earlier versions
+                }
             }
         }
     }
-    public func getDirections(completion: @escaping(Result<[NavResponse]?,Error>) -> Void) {
+    public func getDirections(completion: @escaping(Result<[NavResponse]?>) -> Void) {
     mapQueryDirections()
     let filter = requestParameters
-    let request = AF.request(directions!, method: .get, parameters: filter)
+    let request = Alamofire.request(directions!, method: .get, parameters: filter)
             request.validate(statusCode: 200..<300)
             request.validate(contentType: ["application/json"])
             request.responseJSON { response in
@@ -446,7 +504,12 @@ extension API {
                 case .success:
                     guard let data = response.data, let value = try? JSONDecoder().decode(ResponseType.self, from: data) else {
                         completion(.failure(BaatoError.emptyResponse))
-                        os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
+                        if #available(iOS 10.0, *) {
+                            os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
+                        } else {
+                            print("[Refresh Request] Error parsing JSON");
+                            // Fallback on earlier versions
+                        }
                         return
                     }
                     while !value.data.isAtEnd {
@@ -465,14 +528,19 @@ extension API {
 
                 case .failure:
                     completion(.failure(response.error!))
-                    os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
+                    if #available(iOS 10.0, *) {
+                        os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
+                    } else {
+                        print("[Refresh Request] Request failed");
+                        // Fallback on earlier versions
+                    }
                 }
             }
     }
-    public func getMapboxDirections(completion: @escaping(Result<Data?,Error>) -> Void) {
+    public func getMapboxDirections(completion: @escaping(Result<Data?>) -> Void) {
         mapboxQueryDirections()
     let filter = requestParameters
-    let request = AF.request(directions!, method: .get, parameters: filter)
+    let request = Alamofire.request(directions!, method: .get, parameters: filter)
             request.validate(statusCode: 200..<300)
             request.validate(contentType: ["application/json"])
             request.responseJSON { response in
@@ -481,14 +549,24 @@ extension API {
 
                     guard let data = response.data else {
                         completion(.failure(BaatoError.parseError))
-                        os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
+                        if #available(iOS 10.0, *) {
+                            os_log("[Refresh Request] Error parsing JSON", log: OSLog.default, type: .error)
+                        } else {
+                            print("[Refresh Request] Error parsing JSON");
+                            // Fallback on earlier versions
+                        }
                         return
                     }
                     completion(.success(data))
 
                 case .failure:
                     completion(.failure(response.error!))
-                    os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
+                    if #available(iOS 10.0, *) {
+                        os_log("[Refresh Request] Request failed", log: OSLog.default, type: .error)
+                    } else {
+                        print("[Refresh Request] Request failed");
+                        // Fallback on earlier versions
+                    }
                 }
             }
     }
@@ -496,6 +574,11 @@ extension API {
     public func getmapstyle(){
     }
     fileprivate func reportErrorFetching(_ type: String, identifier: Int? = nil, reason: String) {
-        os_log("Error fetching %@%@: %@", log: OSLog.default, type: .error, type, identifier != nil ? " \(identifier!)" : "", reason)
+        if #available(iOS 10.0, *) {
+            os_log("Error fetching %@%@: %@", log: OSLog.default, type: .error, type, identifier != nil ? " \(identifier!)" : "", reason)
+        } else {
+            print("Error fetching data");
+            // Fallback on earlier versions
+        }
     }
 }
